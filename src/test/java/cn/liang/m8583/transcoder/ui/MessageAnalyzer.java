@@ -32,8 +32,6 @@ import cn.liang.m8583.message.support.WorkingKeyResponse;
 import cn.liang.m8583.transcoder.DefaultTranscoder;
 import cn.liang.m8583.transcoder.MessageUtil;
 
-import com.sfpay.framework.common.json.JSONUtils;
-
 public class MessageAnalyzer extends JFrame{
 
 	private static final KeyFinder kf = new KeyFinderDemo();

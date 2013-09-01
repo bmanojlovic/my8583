@@ -5,7 +5,7 @@ import cn.liang.m8583.message.RequestResponse;
 
 /**
  * 消费撤销响应
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-20
  */
 public class PurchaseCancellationResponse extends RequestResponse{

@@ -4,7 +4,7 @@ import cn.liang.m8583.message.InputMessage;
 import cn.liang.m8583.message.OutputMessage;
 
 /**
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-12
  * 没有对应的处理器，但要求解码器解码时用此类。
  */

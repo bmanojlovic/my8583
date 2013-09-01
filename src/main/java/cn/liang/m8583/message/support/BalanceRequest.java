@@ -1,17 +1,14 @@
 package cn.liang.m8583.message.support;
 
-import java.util.Arrays;
-
 import cn.liang.m8583.field.Password;
 import cn.liang.m8583.field.basic.CardNumber;
 import cn.liang.m8583.message.MessageType;
 import cn.liang.m8583.message.Request;
-import cn.liang.m8583.transcoder.Message8583;
 
 
 /**
  * 余额请求报文
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-12
  * 
  */

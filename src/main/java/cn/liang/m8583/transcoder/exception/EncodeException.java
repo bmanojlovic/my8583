@@ -5,7 +5,7 @@ import cn.liang.m8583.message.Message;
 /**
  * 编码异常
  * 在编码8583报文时发生，通常是参数设置有误。
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-16
  */
 public class EncodeException extends Exception{

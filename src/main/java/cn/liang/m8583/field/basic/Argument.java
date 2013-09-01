@@ -1,25 +1,29 @@
 package cn.liang.m8583.field.basic;
 
+import cn.liang.m8583.field.StringField;
 import cn.liang.m8583.transcoder.MessageUtil;
 
 /**
  * 签到时，下发的参数。
  * 此类容易受需求影响而发生变化。
  * 
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-5-2
  */
-public class Argument {
+public class Argument extends StringField{
 	
 	private long rmbNeedCode;
 	private long integralNeedCode;
 	private long limitOfRecharge;
 	private int expireTime;
 
-	public Argument(){}
+	public Argument(){
+		super(63, "下发参数", 999, 0);
+	}
+	
 	public Argument(long rmbNeedCode, long integralNeedCode,
 			long limitOfRecharge, int expireTime) {
-
+		this();
 		this.rmbNeedCode = rmbNeedCode;
 		this.integralNeedCode = integralNeedCode;
 		this.limitOfRecharge = limitOfRecharge;
@@ -100,16 +104,4 @@ public class Argument {
 
 	}
 	
-	@Override
-	public boolean equals(Object obj){
-		if(!(obj instanceof Argument)){
-			return false;
-		}
-		Argument arg = (Argument)obj;
-		return  this.expireTime== arg.getExpireTime()
-				&& this.integralNeedCode == arg.getIntegralNeedCode()
-				&& this.limitOfRecharge == arg.getLimitOfRecharge()
-				&& this.rmbNeedCode == arg.getRmbNeedCode();
-				
-	}
 }

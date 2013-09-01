@@ -11,7 +11,7 @@ import cn.liang.m8583.transcoder.exception.FieldOverflowException;
 
 /**
  * 8583报文的字段。在切分、组装、翻译报文时用到此类。
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-14
  */
 public class Field {
@@ -20,15 +20,15 @@ public class Field {
 	/**
 	 * 定义 
 	 */
-	public static final int VL0=0;
+	public static final int FIXED=0;
 	/**
 	 * 2位变长
 	 */
-	public static final int VL2=2;
+	public static final int VARL2=2;
 	/**
 	 * 3位变长
 	 */
-	public static final int VL3 =3;
+	public static final int VARL3 =3;
 	
 	// 域索引
 	private int index;
@@ -239,10 +239,10 @@ public class Field {
 	}
 	
 	
-	public static final Field NO_USE_999 = new Field("NO USE ",999, 0, 3, DataType.STRING);
+	public static final Field NO_USE_999 = new Field("NO USE ",999, 0, 3, DataType.ASCII);
 	public static final Field NO_USE = NO_USE_999;
-	public static final Field NO_USE_3 = new Field("NO USE ",3, 0, 0, DataType.STRING);
-	public static final Field NO_USE_8 = new Field("NO USE ",8, 0, 0, DataType.STRING);
-	public static final Field NO_USE_12 = new Field("NO USE ",12, 0, 0, DataType.STRING);
+	public static final Field NO_USE_3 = new Field("NO USE ",3, 0, 0, DataType.ASCII);
+	public static final Field NO_USE_8 = new Field("NO USE ",8, 0, 0, DataType.ASCII);
+	public static final Field NO_USE_12 = new Field("NO USE ",12, 0, 0, DataType.ASCII);
 	//public static final Field NO_USE_12 = new Field("NO USE ",12, 0, 0, DataType.STRING);
 }

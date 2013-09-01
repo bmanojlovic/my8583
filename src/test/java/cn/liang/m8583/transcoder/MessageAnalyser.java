@@ -22,7 +22,7 @@ import com.sfpay.framework.common.json.JSONUtils;
 /**
  * 报文分析器
  * 16进制字符串写成一行添加在message.txt下。
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-4-13
  */
 public class MessageAnalyser {

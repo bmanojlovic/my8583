@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 位图，我们系统只用64位，内部以长整型表示。
  * 位图是8583报文的灵魂所在，报文的切分与组装都必须。
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-12
  */
 public class BitMap extends BinaryField{

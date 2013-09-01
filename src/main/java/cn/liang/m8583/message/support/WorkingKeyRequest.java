@@ -5,7 +5,7 @@ import cn.liang.m8583.message.Request;
 
 /**
  * 同步工作密钥的请求
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-22
  */
 public class WorkingKeyRequest extends Request{

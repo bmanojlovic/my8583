@@ -11,7 +11,7 @@ import cn.liang.m8583.transcoder.exception.EncodeException;
  * 1、字节数组形态（传输形态）
  * 2、字段形态（中间形态），调用者不应该关心此形态。
  * 3、java域模型(domain)的形态
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-09
  */
 public interface Transcoder {

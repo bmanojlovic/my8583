@@ -7,7 +7,7 @@ import cn.liang.m8583.transcoder.MessageUtil;
 /**
  * 解码异常
  * 在解码8583报文时发生。发生此异常，通常可以抛弃报文，不予处理
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-16
  */
 public class DecodeException extends Exception {

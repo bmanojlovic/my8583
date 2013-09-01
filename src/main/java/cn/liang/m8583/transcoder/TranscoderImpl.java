@@ -13,7 +13,7 @@ import cn.liang.m8583.transcoder.exception.EncodeException;
 
 /**
  * 8583报文（引擎）转码器的实现类
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-12
  */
 public class TranscoderImpl implements Transcoder {
@@ -24,15 +24,9 @@ public class TranscoderImpl implements Transcoder {
 		try {
 			byte[] data = MessageUtil.removeMessageHead(bytes);
 			
-			//切分原始报文
-			Message8583 m8583 = new Message8583();
-			m8583.decode(data);
-			
-			//转化成java认识的报文对象
-			Class<? extends Message> clazz = Message.getMessageClass(
-					m8583.getMessageType(), m8583.getProcessCode());
-			Message mes = clazz.newInstance();
-			mes.decode(m8583);
+
+
+			Message mes = null;
 			
 			return mes;
 		} catch (Exception e) {
@@ -71,15 +65,11 @@ public class TranscoderImpl implements Transcoder {
 	public byte[] encode(Message mes) throws EncodeException {
 		try {
 			//转换成字段形态
-			Message8583 m8583 = mes.encode();
-			m8583.setMessageType(mes.getMessageType());
-			m8583.setProcessCode(mes.getProcessCode());
-			//转换成字节数组形态
-			byte[] data =  m8583.encode();
 			
 			//添加报文头
-			byte[] bytes = MessageUtil.addMessageHead(data);
-			return bytes;
+			//byte[] bytes = MessageUtil.addMessageHead(data);
+			//return bytes;
+			return null;
 		} catch (Exception e) {
 			throw new EncodeException(mes, e);
 		}

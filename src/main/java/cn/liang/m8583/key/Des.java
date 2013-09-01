@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * DES算法。ECB,无填充方式。
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-30
  */
 public class Des {

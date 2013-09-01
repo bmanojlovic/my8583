@@ -11,7 +11,7 @@ package cn.liang.m8583.transcoder;
  * bcd:BCD码。byte[];一个字节表示两个BCD元素，每个元素表示0-9，即0000至1001
  * asc:ascii字符（串）。byte[];一个字节表示一个ascii字符。
  * 
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-14
  */
 public class MessageUtil {

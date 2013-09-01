@@ -10,7 +10,7 @@ import cn.liang.m8583.transcoder.exception.CipherException;
 
 /**
  * DES算法的加密机实现，可以加密与解密
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-31
  */
 public class DesEncryptor implements Encryptor {

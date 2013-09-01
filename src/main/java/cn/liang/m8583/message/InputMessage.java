@@ -1,9 +1,9 @@
 package cn.liang.m8583.message;
 
-import cn.liang.m8583.transcoder.Message8583;
+import cn.liang.m8583.field.basic.Operator;
 
 /**
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-09
  * 输入类报文，即通常的pos发给系统的报文
  */
@@ -11,39 +11,22 @@ public abstract class InputMessage extends Message{
 
 	public InputMessage(MessageType mt) {
 		super(mt);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * 操作员，必填。
-	 * 针对顺丰业务的特殊字段。
+	 * 
 	 */
-	private String operator;
+	private Operator operator;
 
 
-	public String getOperator() {
+	public Operator getOperator() {
 		return operator;
 	}
 
 	
 
-	public void setOperator(String operator) {
-		this.operator = operator;
-	}
-
-
-	@Override
-	public void decode(Message8583 mes) {
-		super.decode(mes);
-		this.operator = mes.getOperator();
-	}	
-
-	@Override
-	public Message8583 encode() {
-		Message8583 mes = super.encode();
-		mes.setOperator(this.operator);
-		return mes;
-	}
+	
 	
 	@Override
 	public boolean equals(Object obj) {

@@ -14,7 +14,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 
-import cn.liang.m8583.transcoder.Message8583;
+import cn.liang.m8583.field.Protocol;
 import cn.liang.m8583.transcoder.exception.CipherException;
 
 
@@ -23,7 +23,7 @@ import cn.liang.m8583.transcoder.exception.CipherException;
  * 因为使用CBC连接方式，PKCS填充方式，不适合于8583报文。
  * 在8583报文中不建议使用。
  * @deprecated
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-13
  */
 public  class CipherUtil {
@@ -187,7 +187,7 @@ public  class CipherUtil {
 	public String decryptPassword(String terminalID, byte[] pinData) throws CipherException{
 		byte[] pin = this.decrypt(terminalID, pinData);
 		try {
-			return new String(pin, Message8583.CHARSET.name());
+			return new String(pin, Protocol.CHARSET.name());
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,7 +205,7 @@ public  class CipherUtil {
 	public byte[] encryptPassword(String terminalID,String password) throws CipherException{
 		byte[] pin = null;
 		try {
-			pin = this.encrypt(terminalID, password.getBytes( Message8583.CHARSET.name()));
+			pin = this.encrypt(terminalID, password.getBytes( Protocol.CHARSET.name()));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

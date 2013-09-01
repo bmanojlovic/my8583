@@ -5,19 +5,25 @@ import java.nio.charset.Charset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.liang.m8583.field.*;
 import cn.liang.m8583.field.basic.CardNumber;
+import cn.liang.m8583.field.basic.CurrencyCode;
+import cn.liang.m8583.field.basic.Node;
+import cn.liang.m8583.field.basic.Operator;
 import cn.liang.m8583.field.basic.ProcessCode;
+import cn.liang.m8583.field.basic.ResponseCode;
+import cn.liang.m8583.field.basic.RetrievalReferenceNumber;
 import cn.liang.m8583.field.basic.TTC;
 import cn.liang.m8583.field.basic.Terminal;
+import cn.liang.m8583.field.basic.TransactionAmount;
+import cn.liang.m8583.field.basic.TransactionDate;
+import cn.liang.m8583.field.basic.TransactionTime;
 import cn.liang.m8583.message.MessageType;
-import cn.liang.m8583.transcoder.Message8583;
 
 
 /**
  * 8583编码的报文，用于切分与组装字节数组形态的报文。 此类应该定义字段位域，定义报文对应的messageType与processCode
  * 
- * @author 325336, Liang Yabao 2012-3-12
+ * @author  Liang Yabao 2012-3-12
  */
 public class Protocol {
 
@@ -26,7 +32,7 @@ public class Protocol {
 	private static final int WAYBILL_SIZE = 12;
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(Message8583.class);
+			.getLogger(Protocol.class);
 
 	private static final int WORKING_KEY_SIZE = 24;
 	private static final int WORKING_KEY_CHECK_VALUE_SIZE = 4;
@@ -47,84 +53,80 @@ public class Protocol {
 
 		fields[2] = new CardNumber();
 		fields[3] = new ProcessCode();
-		fields[4] = new Field("TRANSACTION AMOUNT ", 12, 0, DataType.INTEGER);
+		fields[4] = new TransactionAmount();
 		fields[5] = Field.NO_USE_12;
 		fields[6] = Field.NO_USE_12;
 		fields[7] = new Field("TRANSACTION DATE AND TIME ", 10, 0,
-				DataType.STRING);
+				DataType.ASCII);
 		fields[8] = Field.NO_USE_8;
 		fields[9] = Field.NO_USE_8;
 		fields[10] = Field.NO_USE_8;
 		fields[11] = new TTC();
-		fields[12] = new Field("TIME, LOCAL TRANSACTION ", 6, 0,
-				DataType.NUMBER);
-		fields[13] = new Field("DATE, LOCAL TRANSACTION ", 8, 0,
-				DataType.NUMBER);
-		fields[14] = new Field("DATE, EXPIRATION ", 4, 0, DataType.STRING);
-		fields[15] = new Field("DATE, SETTLEMENT ", 4, 0, DataType.STRING);
+		fields[12] = new TransactionTime();
+		fields[13] = new TransactionDate();
+		fields[14] = new Field("DATE, EXPIRATION ", 4, 0, DataType.ASCII);
+		fields[15] = new Field("DATE, SETTLEMENT ", 4, 0, DataType.ASCII);
 		fields[16] = Field.NO_USE;
-		fields[17] = new Field("DATE, CAPTURE ", 4, 0, DataType.STRING);
-		fields[18] = new Field("MERCHANT'S TYPE ", 4, 0, DataType.STRING);
+		fields[17] = new Field("DATE, CAPTURE ", 4, 0, DataType.ASCII);
+		fields[18] = new Field("MERCHANT'S TYPE ", 4, 0, DataType.ASCII);
 		fields[19] = Field.NO_USE;
 		fields[20] = Field.NO_USE;
 		fields[21] = Field.NO_USE;
 		fields[22] = new Field("POINT OF SERVICE ENTRY MODE ", 3, 0,
-				DataType.STRING);
+				DataType.ASCII);
 		fields[23] = Field.NO_USE;
 		fields[24] = new Field("Network International identifier ", 3, 0,
 				DataType.INTEGER);
 		fields[25] = new Field("POINT OF SERVICE CONDITION CODE ", 2, 0,
-				DataType.STRING);
+				DataType.ASCII);
 		fields[26] = Field.NO_USE;
 		fields[27] = Field.NO_USE;
-		fields[28] = new Field("field27 ", 6, 0, DataType.STRING);
+		fields[28] = new Field("field27 ", 6, 0, DataType.ASCII);
 		fields[29] = Field.NO_USE;
 		fields[30] = Field.NO_USE;
 		fields[31] = Field.NO_USE;
 		fields[32] = new Field("ACQUIRER INSTITUTION ID. CODE ", 11, 2,
-				DataType.STRING);
+				DataType.ASCII);
 		/* FLD 33 */
 		// new Field("FORWARDING INSTITUTION ID. CODE ", 11, 2,
 		// Field.DataType.STRING),
 		fields[33] = new Field("PHONE NUMBER ", 11, 2, DataType.NUMBER);
 		fields[34] = new Field("TRANSACTION QUERY ", 28, 2, DataType.NUMBER);
-		fields[35] = new Field("TRACK 2 DATA ", 37, 2, DataType.STRING);
-		fields[36] = new Field("TRACK 3 DATA ", 104, 3, DataType.STRING);
-		fields[37] = new Field("RETRIEVAL REFERENCE NUMBER ", 20, 0,
-				DataType.STRING);
+		fields[35] = new Field("TRACK 2 DATA ", 37, 2, DataType.ASCII);
+		fields[36] = new Field("TRACK 3 DATA ", 104, 3, DataType.ASCII);
+		fields[37] = new RetrievalReferenceNumber();
 		fields[38] = new Field("AUTH. IDENTIFICATION RESPONSE ", 6, 0,
-				DataType.STRING);
-		fields[39] = new Field("RESPONSE CODE ", 2, 0, DataType.STRING);
+				DataType.ASCII);
+		fields[39] = new ResponseCode();
 		fields[40] = Field.NO_USE;
 		fields[41] = new Terminal();
-		fields[42] = new Field("NODE ID. ", 8, 0, DataType.STRING);
+		fields[42] = new Node();
 		fields[43] = new Field("CARD ACCEPTOR NAME LOCATION ", 40, 0,
-				DataType.STRING);
+				DataType.ASCII);
 		fields[44] = new Field("ADDITIONAL RESPONSE DATA ", 25, 2,
-				DataType.STRING);
+				DataType.ASCII);
 		fields[45] = Field.NO_USE;
 		fields[46] = Field.NO_USE;
-		fields[47] = new Field("field47 ", 999, 3, DataType.STRING);
+		fields[47] = new Field("field47 ", 999, 3, DataType.ASCII);
 		fields[48] = new Field("ADDITIONAL DATA --- PRIVATE ", 999, 3,
-				DataType.STRING);
-		fields[49] = new Field("CURRENCY CODE,TRANSACTION ", 3, 0,
-				DataType.STRING);
+				DataType.ASCII);
+		fields[49] = new CurrencyCode();
 		fields[50] = new Field("CURRENCY CODE,SETTLEMENT ", 3, 0,
-				DataType.STRING);
+				DataType.ASCII);
 		fields[51] = Field.NO_USE;
 		fields[52] = new Password();
 		fields[53] = new Field("SECURITY RELATED CONTROL INformATION", 16, 0,
-				DataType.STRING);
-		fields[54] = new Field("ADDITIONAL AMOUNTS ", 120, 3, DataType.STRING);
+				DataType.ASCII);
+		fields[54] = new Field("ADDITIONAL AMOUNTS ", 120, 3, DataType.ASCII);
 		fields[55] = Field.NO_USE;
 		fields[56] = Field.NO_USE;
-		fields[57] = new Field("PREFERENTIAL INFO. ", 999, 3, DataType.STRING);
+		fields[57] = new Field("PREFERENTIAL INFO. ", 999, 3, DataType.ASCII);
 		fields[58] = Field.NO_USE;
-		fields[59] = new Field("TRANSACTION DETAIL ", 999, 3, DataType.STRING);
+		fields[59] = new Field("TRANSACTION DETAIL ", 999, 3, DataType.ASCII);
 		fields[60] = new Field("WAYBILL NO. ", 999, 3, DataType.NUMBER);
-		fields[61] = new Field("OPERATOR ", 6, 3, DataType.STRING);
+		fields[61] = new Operator();
 		fields[62] = Field.NO_USE;
-		fields[63] = new Field("ERROR INFO. ", 999, 3, DataType.STRING);
+		fields[63] = new Field("ERROR INFO. ", 999, 3, DataType.ASCII);
 		fields[64] = new Field("MESSAGE AUTHENTICATION CODE ", 8, 0,
 				DataType.BINARY);
 	}

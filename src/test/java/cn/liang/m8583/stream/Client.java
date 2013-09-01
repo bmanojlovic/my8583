@@ -5,7 +5,7 @@ import java.net.Socket;
 
 
 /**
- * @author 325336, Liang Yabao
+ * @author , Liang Yabao
  * 2012-4-5
  */
 public class Client {

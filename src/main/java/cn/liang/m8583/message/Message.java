@@ -4,23 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.liang.m8583.field.BitMap;
+import cn.liang.m8583.field.Field;
+import cn.liang.m8583.field.basic.Node;
+import cn.liang.m8583.field.basic.ProcessCode;
 import cn.liang.m8583.field.basic.TTC;
 import cn.liang.m8583.field.basic.Terminal;
-import cn.liang.m8583.transcoder.Message8583;
 
 
 /**
- * @author 325336, Liang Yabao 2012-3-12 
+ * @author  Liang Yabao 2012-3-12 
  * 报文超类. 
  * 这里是指已经翻译成java系统认识的报文，不是8583编码的报文.
  * message type 与process code是Message子类的一个属性，不是Message实例的属性。
  */
 public abstract class Message {
 
-	public final MessageType mt;
-	public Message(MessageType mt){
-		this.mt = mt;
-	}
 	/**
 	 * BitMap
 	 */
@@ -38,7 +36,15 @@ public abstract class Message {
 	/**
 	 * 分枝机构标识，与terminalId联合标识唯一。
 	 */
-	private String nodeId;
+	private Node nodeId;
+
+	private ProcessCode processCode = new ProcessCode();
+	
+	
+	public final MessageType mt;
+	public Message(MessageType mt){
+		this.mt = mt;
+	}
 
 	private boolean validateFlag= false;
 	
@@ -56,18 +62,18 @@ public abstract class Message {
 		this.validateFlag = validateFlag;
 	}
 	
-	public void setTerminalId(Terminal terminalId) {
+	 void setTerminalId(Terminal terminalId) {
 		this.terminalId = terminalId;
 	}
 
-	public void setNodeId(String nodeId) {
-		this.nodeId = nodeId;
-	}
-	
-	public void setTtc(TTC ttc) {
+
+	 void setTtc(TTC ttc) {
 		this.ttc = ttc;
 	}
 	
+	 void setNodeId(Node nodeId){
+		 this.nodeId = nodeId;
+	 }
 	public TTC getTtc() {
 		return ttc;
 	}
@@ -76,7 +82,7 @@ public abstract class Message {
 		return terminalId;
 	}
 
-	public String getNodeId() {
+	public Node getNodeId() {
 		return nodeId;
 	}
 
@@ -115,8 +121,8 @@ public abstract class Message {
 	 * 通常情况下不应该被override，但冲正交易，是与具体实例相关的，不与类绑定。
 	 * @return	六数字，表示处理码
 	 */
-	public  String getProcessCode() {
-		return Message.getProcessCode(this.getClass());
+	public  ProcessCode getProcessCode() {
+		return processCode;
 	}
 
 
@@ -124,7 +130,7 @@ public abstract class Message {
 	 * 把报文从字段形态解码成为java认识的形态。
 	 * @param mes
 	 */
-	public void decode(Message8583 mes) {
+	public void decode(Field[] fields) {
 
 	}	
 
@@ -134,17 +140,11 @@ public abstract class Message {
 	 * 必填字段如果为空，则可能抛出异常
 	 * @return
 	 */
-	public Message8583 encode() {
-		Message8583 mes = new Message8583();
+	public Field[] encode() {
 		
-		//messageType 与processCode是类属性，应用启动时注册
-		mes.setMessageType(getMessageType());
-		mes.setProcessCode(getProcessCode());
 		
-		mes.setNodeID(this.nodeId);
 
-
-		return mes;
+		return new Field[]{mt,nodeId,terminalId,ttc};
 	}
 	
 	@Override

@@ -1,11 +1,11 @@
 package cn.liang.m8583.message;
 
-import java.util.Date;
-
-import cn.liang.m8583.transcoder.Message8583;
+import cn.liang.m8583.field.basic.ResponseCode;
+import cn.liang.m8583.field.basic.TransactionDate;
+import cn.liang.m8583.field.basic.TransactionTime;
 
 /**
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-12
  * 输出类报文，即系统发给pos的报文。
  * 在响应码为00情况下的约定：
@@ -20,26 +20,24 @@ public abstract class OutputMessage extends Message{
 
 	public OutputMessage(MessageType mt) {
 		super(mt);
-		// TODO Auto-generated constructor stub
-	}
-	private Date dateTime = new Date();
-	private String responseCode;
 
-	public Date getDateTime() {
-		return dateTime;
 	}
 
+	private TransactionDate localDate = new TransactionDate();
+	private TransactionTime localTime = new TransactionTime();
+	private ResponseCode responseCode;
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
+	public TransactionDate getLocalDate() {
+		return localDate;
+	}
+
+	public TransactionTime getLocalTime() {
+		return localTime;
 	}
 
 
-	public void setResponseCode(String responseCode) {
-		this.responseCode = responseCode;
-	}
 
-	public String getResponseCode() {
+	public ResponseCode getResponseCode() {
 		return responseCode;
 	}
 
@@ -54,33 +52,7 @@ public abstract class OutputMessage extends Message{
 		this.setTtc(im.getTtc());
 	}
 	
-	
-	@Override
-	public Message8583 encode() {
-		Message8583 mes = super.encode();
-		mes.setResponseCode(responseCode);
-		mes.setTransactionDateTime( dateTime);
-		
-		return mes;
-	}
 
-
-	@Override
-	public void decode(Message8583 mes) {
-		super.decode(mes);
-		this.dateTime = mes.getTransactionDateTime();
-		this.responseCode = mes.getResponseCode();
-		
-	}
-	@Override
-	public boolean equals(Object obj){
-		if(!super.equals(obj) ||!(obj instanceof OutputMessage)){
-			return false;
-		}
-		OutputMessage om = (OutputMessage) obj;
-		return this.dateTime.toString().equals(om.getDateTime().toString())
-				&& this.responseCode.equals(om.getResponseCode());
-	}
 
 
 }

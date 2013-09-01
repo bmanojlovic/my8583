@@ -12,7 +12,7 @@ import cn.liang.m8583.transcoder.exception.CipherException;
 
 
 /**
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-4-5
  */
 public class PasswordTest {

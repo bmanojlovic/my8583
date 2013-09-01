@@ -10,7 +10,7 @@ import cn.liang.m8583.transcoder.exception.CipherException;
  * 硬件加密机，对传输的数据进行加密的外围硬件设备，用于PIN的加密和解密、验证报文和文件来源的正确性以及存储密钥。
  * 本系统中使用软加密机，功能与硬件加密机相当。
  * 
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-31
  */
 public interface Encryptor {

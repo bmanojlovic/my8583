@@ -9,7 +9,7 @@ import org.junit.Test;
 import cn.liang.m8583.field.basic.AdditionalAmount;
 
 /**
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-4-5
  */
 public class AdditionalAmountTest {
@@ -27,7 +27,7 @@ public class AdditionalAmountTest {
 		
 		
 		byte[] bb = aa.encode();
-		AdditionalAmount aa2 = new AdditionalAmount();
+		AdditionalAmount aa2 = new AdditionalAmount("20","01","CNY",999999999999L);
 		aa2.decode(bb);
 
 		System.out.println(aa2.equals(aa));

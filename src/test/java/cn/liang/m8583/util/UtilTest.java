@@ -9,7 +9,7 @@ import org.junit.Test;
 import cn.liang.m8583.transcoder.MessageUtil;
 
 /**
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-4-5
  */
 public class UtilTest {

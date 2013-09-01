@@ -5,7 +5,7 @@ public enum DataType{
 	/**
 	 * ASCII字符，一个字节表示一个ASCII字符，元素个数以字节数计算
 	 */
-	STRING(0),
+	ASCII(0),
 	
 	/**
 	 * 整型数据，BCD压缩表示，靠右表示。元素个数为数字个数。

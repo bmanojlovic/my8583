@@ -29,7 +29,7 @@ import cn.liang.m8583.transcoder.exception.EncodeException;
  * 
  * </p>
  * 
- * @author 325336 <a href="mailto:liangyabao@sf-express.com">梁亚保</a>
+ * @author  <a href="mailto:liangyabao@sf-express.com">梁亚保</a>
  * 
  * CreateDate: 2012-5-21
  */

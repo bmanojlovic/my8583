@@ -2,7 +2,7 @@ package cn.liang.m8583.key;
 
 /**
  * 标准MAC算法。
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-4-13
  */
 public class Mac extends Des{

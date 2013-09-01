@@ -5,7 +5,7 @@ import cn.liang.m8583.transcoder.MessageUtil;
 public abstract class StringField extends Field {
 
 	public StringField(int index, String name, int maxLength, int varLength) {
-		super(index, name, maxLength, varLength, DataType.STRING);
+		super(index, name, maxLength, varLength, DataType.ASCII);
 	}
 
 	public void setAscii(String tid) {

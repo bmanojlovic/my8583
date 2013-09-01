@@ -5,7 +5,7 @@ import cn.liang.m8583.message.OutputMessage;
 
 
 /**
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-12
  * 对应于Request类报文的处理器
  * @see Request

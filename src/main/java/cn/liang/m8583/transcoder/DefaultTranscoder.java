@@ -8,20 +8,16 @@ import cn.liang.m8583.message.support.PurchaseCancellationRequest;
 import cn.liang.m8583.message.support.PurchaseCancellationResponse;
 import cn.liang.m8583.message.support.PurchaseRequest;
 import cn.liang.m8583.message.support.PurchaseResponse;
-import cn.liang.m8583.message.support.RechargeCancellationRequest;
-import cn.liang.m8583.message.support.RechargeCancellationResponse;
 import cn.liang.m8583.message.support.RechargeRequest;
 import cn.liang.m8583.message.support.RechargeResponse;
 import cn.liang.m8583.message.support.ReverseRequest;
 import cn.liang.m8583.message.support.ReverseResponse;
-import cn.liang.m8583.message.support.TransactionDetailRequest;
-import cn.liang.m8583.message.support.TransactionDetailResponse;
 import cn.liang.m8583.message.support.WorkingKeyRequest;
 import cn.liang.m8583.message.support.WorkingKeyResponse;
 
 /**
  * 报文引擎默认实现
- * @author 325336, Liang Yabao
+ * @author  Liang Yabao
  * 2012-3-22
  */
 public class DefaultTranscoder extends TranscoderImpl{
@@ -50,9 +46,7 @@ public class DefaultTranscoder extends TranscoderImpl{
 		this.accept("7200", "200000", PurchaseCancellationRequest.class);
 		this.accept("7210", "200000", PurchaseCancellationResponse.class);
 		
-		//充值撤销
-		this.accept("7200", "170000", RechargeCancellationRequest.class);
-		this.accept("7210", "170000", RechargeCancellationResponse.class);
+
 
 		
 		//冲正交易的处理码与冲正的原始交易相同，所以processCode是实例成员，不是静态成员
@@ -69,10 +63,7 @@ public class DefaultTranscoder extends TranscoderImpl{
 		this.accept("7400", "170000", ReverseRequest.class);
 		this.accept("7410", "170000", ReverseResponse.class);
 		
-		//交易明细
-		this.accept("7100", "380000", TransactionDetailRequest.class);
-		this.accept("7110", "380000", TransactionDetailResponse.class);
-		
+
 		//同步密钥
 		this.accept("7800", "790000", WorkingKeyRequest.class);
 		this.accept("7810", "790000", WorkingKeyResponse.class);

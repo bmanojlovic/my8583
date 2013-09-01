@@ -23,23 +23,12 @@ public class AdditionalAmount {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdditionalAmount.class);
 	
-	public String getAccountType() {
-		return accountType;
-	}
-	public String getAmountType() {
-		return amountType;
-	}
-	public String getCurrencyCode() {
-		return currencyCode;
-	}
-	public long getAmount() {
-		return amount;
-	}
-
-	private String accountType;
-	private String amountType;
-	private String currencyCode;
-	private long amount;
+	
+	public  String accountType;
+	public   String amountType;
+	public final  CurrencyCode currencyCode = new CurrencyCode();
+	public final  Amount amount = new Amount(-1,"AdditionalAmount");
+	
 
 	/**
 	 * 
@@ -51,12 +40,10 @@ public class AdditionalAmount {
 	public AdditionalAmount(String accountType,String amountType, String currencyCode, long amount) {
 		this.accountType = accountType;
 		this.amountType = amountType;
-		this.currencyCode = currencyCode;
-		this.amount = amount;
+		this.currencyCode.setAscii(currencyCode);
+		this.amount.setInteger(amount);
 	}
-	public AdditionalAmount(){
-		
-	}
+
 	
 	public byte[] encode() {
 		if(accountType.length()!=2){
@@ -65,29 +52,22 @@ public class AdditionalAmount {
 		if(amountType.length()!=2){
 			throw new RuntimeException("AdditionalAmount's amount type must be two digits!");
 		}
-		if(currencyCode.length()!=3){
-			throw new RuntimeException("AdditionalAmount's currency code must be 3 digits or letters!");
-		}
-		if (amount >= 1000000000000L) {
-			throw new RuntimeException("AdditionalAmount's amount is too big!");
-		}
+		
 		byte[] bytes = new byte[SIZE];
+		
+
 		//账户类型
 		System.arraycopy(MessageUtil.str2asc(accountType), 0, bytes, 0, 2);
 		//金额类型
 		byte[] at = MessageUtil.str2asc(amountType);
 		System.arraycopy(at, 0, bytes, 2, at.length);
 		//币种
-		byte[] cc = MessageUtil.str2asc(currencyCode);
-		System.arraycopy(cc, 0, bytes, 4, cc.length);
+		currencyCode.write(bytes, 4);
+		
 		//记账符号
 		bytes[7] = AMOUNT_SIGN;
 		//金额 
-		MessageUtil.long2asc(amount, 12, bytes, 8);
-		if (logger.isDebugEnabled()) {
-			//logger.debug("[json]{}", JSONUtils.fromObject(this));
-			logger.debug("[byte]{}", new String(MessageUtil.byte2hex(bytes)));
-		}
+		amount.write(bytes, 8);
 		return bytes;
 	}
 	
@@ -103,27 +83,13 @@ public class AdditionalAmount {
 		//币种 4-6
 		byte[] cc = new byte[3];
 		System.arraycopy(bytes, 4, cc, 0, 3);
-		this.currencyCode = MessageUtil.asc2str(cc);
+		this.currencyCode.read(cc, 0);
 		//byte[] ambs = new byte[12];
 		//System.arraycopy(bytes, 8, ambs, 0, 12);
 		//this.amount = MessageUtil.asc2int(ambs);
-		this.amount = MessageUtil.asc2long(bytes, 8, 12);
-		if (logger.isDebugEnabled()) {
-			logger.debug("[byte]{}", new String(MessageUtil.byte2hex(bytes)));
-			//logger.debug("[json]{}", JSONUtils.fromObject(this));
-		}
+		this.amount.read(bytes,8);
 		return this;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof AdditionalAmount)) {
-			return false;
-		}
-		AdditionalAmount aa = (AdditionalAmount) obj;
-		return aa.getAccountType().equals(this.getAccountType())
-				&& aa.getAmount() == amount && aa.getAmountType().equals(amountType)
-				&& aa.getCurrencyCode().equals(currencyCode);
 
-	}
 }
