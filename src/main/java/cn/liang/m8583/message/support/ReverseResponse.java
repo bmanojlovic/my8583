@@ -22,7 +22,7 @@ public class ReverseResponse extends RequestResponse{
 	private ProcessCode processCode = new ProcessCode();
 
 	@Override
-	public  String getProcessCode() {
+	public  ProcessCode getProcessCode() {
 		return processCode;
 	}
 	/**

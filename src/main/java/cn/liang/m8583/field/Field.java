@@ -20,15 +20,15 @@ public class Field {
 	/**
 	 * 定义 
 	 */
-	public static final int FIXED=0;
+	public static final int LENGTH_FIXED=0;
 	/**
 	 * 2位变长
 	 */
-	public static final int VARL2=2;
+	public static final int LENGTH_VAR_2=2;
 	/**
 	 * 3位变长
 	 */
-	public static final int VARL3 =3;
+	public static final int LENGTH_VAR_3 =3;
 	
 	// 域索引
 	private int index;
